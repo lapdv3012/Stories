@@ -22,8 +22,10 @@ import ExploreScreen from './src/ui/features/explore/ExploreScreen';
 import CartScreen from './src/ui/features/cart/CartScreen';
 import OtherScreen from './src/ui/features/other/OtherScreen';
 import AccountScreen from './src/ui/features/account/AccountScreen';
+import GenderScreen from './src/ui/features/profile/edit/GenderScreen';
 
 const Stack = createNativeStackNavigator()
+const ProfileStack = createNativeStackNavigator()
 
 const Tabs = createBottomTabNavigator()
 
@@ -39,6 +41,15 @@ const mainTabs = () => {
   )
 }
 
+const ProfileStackScreen = () => {
+  return (
+    <ProfileStack.Navigator screenOptions={{ headerShown: false }}>
+      <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
+      <ProfileStack.Screen name="GenderScreen" component={GenderScreen} />
+    </ProfileStack.Navigator>
+  )
+}
+
 const App = () => {
   return (
     <Provider store={store}>
@@ -47,7 +58,7 @@ const App = () => {
           <Stack.Navigator initialRouteName="HomeScreen">
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} />
-            <Stack.Screen name="ProfileScreen" options={{ headerShown: false }} component={ProfileScreen} />
+            <Stack.Screen name="ProfileScreen" options={{ headerShown: false }} component={ProfileStackScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

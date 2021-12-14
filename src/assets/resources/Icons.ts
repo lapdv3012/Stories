@@ -7,6 +7,7 @@ const ImageAssets = {
     ic_phone: require('../icon/ic_phone.png'),
     ic_password: require('../icon/ic_password.png'),
     ic_message: require('../icon/ic_message.png'),
+    ic_arrow_down: require('../icon/ic_arrow_down.png'),
 }
 
 export default ImageAssets

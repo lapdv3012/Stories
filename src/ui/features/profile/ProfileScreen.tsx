@@ -7,6 +7,8 @@ import Space from '../../components/Space'
 import StatusBarApp from '../../components/StatusBarApp'
 import Dimens from '../../../assets/resources/Dimens'
 import Fonts from '../../../assets/resources/Fonts'
+import ToolBarApp from '../../components/ToolBarApp'
+import Strings from '../../../assets/resources/Strings'
 
 const enum ITEM_PROFILE {
     ITEM_GENDER = 1,
@@ -17,13 +19,34 @@ const enum ITEM_PROFILE {
 }
 
 const ProfileScreen = ({ navigation }: { navigation: any }) => {
-    console.log('XXXXXXXXXX', navigation);
+
+    /**
+     * Navigator
+     * @param id 
+     */
+    const navigator = (id: number) => {
+        switch (id) {
+            case ITEM_PROFILE.ITEM_GENDER:
+                console.log('navigation')
+                navigation.navigate("GenderScreen")
+                break
+            case ITEM_PROFILE.ITEM_BIRTHDAY:
+                break
+            case ITEM_PROFILE.ITEM_EMAIL:
+                break
+            case ITEM_PROFILE.ITEM_PHONE:
+                break
+            case ITEM_PROFILE.ITEM_CHANGE_PASS:
+                break
+        }
+    }
 
     return (
         <SafeAreaView style={styles.container}>
             <StatusBarApp backgroundColor={Colors.colorWhite} isLightContent={false} />
             <ScrollView>
-                <ToolBar goBack={navigation.goBack} />
+
+                <ToolBarApp title={Strings.text_profile} navigation={navigation} />
 
                 <Line />
 
@@ -66,23 +89,6 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
     )
 }
 
-const ToolBar = ({ goBack }) => {
-    console.log('bbbbbb', goBack)
-    return (
-        <View style={styles.toolbar}>
-            <TouchableOpacity onPress={goBack}  >
-                <Image
-                    style={{ width: Dimens.px_32, height: Dimens.px_32 }}
-                    source={ImageAssets.ic_back}
-                />
-            </TouchableOpacity>
-            <View style={{ marginStart: Dimens.px_12 }}>
-                <Text style={[styles.regular, styles.colorTextBlack, { fontWeight: 'bold' }]}>Profile</Text>
-            </View>
-        </View>
-    )
-}
-
 const ItemHeader = () => {
     return (
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Dimens.px_24 }}>
@@ -99,26 +105,6 @@ const ItemHeader = () => {
     )
 }
 
-/**
- * Navigator
- * @param id 
- */
-const navigator = (id: number) => {
-    switch (id) {
-        case ITEM_PROFILE.ITEM_GENDER:
-            break
-        case ITEM_PROFILE.ITEM_BIRTHDAY:
-            break
-        case ITEM_PROFILE.ITEM_EMAIL:
-            break
-        case ITEM_PROFILE.ITEM_PHONE:
-            break
-        case ITEM_PROFILE.ITEM_CHANGE_PASS:
-            break
-    }
-}
-
-
 interface ItemProfile {
     uri?: string | null | any,
     title?: string,
@@ -129,7 +115,7 @@ interface ItemProfile {
 const ItemProfile = (props: ItemProfile) => {
     const { uri, title, content, onPress } = { ...props }
     return (
-        <TouchableOpacity onPress={() => { onPress }}>
+        <TouchableOpacity onPress={onPress}>
             <View style={{ flex: 1, flexDirection: 'row', padding: 16, alignItems: 'center' }}>
                 <Image
                     style={{ width: 24, height: 24 }}
@@ -184,11 +170,7 @@ const styles = StyleSheet.create({
     title: {
         color: '#40BFFF',
     },
-    toolbar: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 12
-    },
+
     circleImage: {
         width: 90,
         height: 90,
